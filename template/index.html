@@ -1,11 +1,125 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>hello</title>
+    <title>login</title>
+    <link href="{% static 'main.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        #sign_up{
+    display: none;
+}
+#sign_up2{
+    display: none;
+}
+    </style>
 </head>
 <body>
-<h1>welcome</h1>
+<div class="container-sm p-2 mt-3 shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+    <h1 class="text-center">LOGIN</h1>
+<div class="row mt-2">
+    <div class="col-6  p-2 mt-3" id="change_div">
+        <h1 class="text-center">WELCOME</h1><div class="card"><div class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <img class="img-fluid"  src="{% static 'image/login.jpg' %}" style="height: 290px;"  alt="login pic"></div></div>
+    </div>
+    <div class="col-6  mt-4 p-2" id="change_div2" >
+        <div class="card mt-5 P-2">
+      
+            <div class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded  mt-3">
+                <!-- <div class="col-3  offset-3 p-3 " style="border-radius: 60px; opacity: 0.7;box-shadow: 2px 2px 2px 3px black; @media screen (max-width:670px) {border-radius:0px;}" >
+                    <img src="{% static 'image/icons8-login-96.png' %}" alt="icon">
+                </div> -->
+
+            <form class="from mt-3 " method="POST" action="">
+                {% csrf_token %}
+                <input type="text" class="col-6 offset-2 mt-3 rounded" placeholder="EMAIL" name="email"><br>
+                <input type="password" class="col-6 offset-2 mt-3 rounded" placeholder="PASSWORD" name="email"><br>
+                <input type="password" class="col-6 offset-2 mt-3 rounded" placeholder="CONFORM PASSWORD" name="email">
+                <div class="row"><h3 class="text-left col-6 offset-2 mt-3">LOGIN</h3><button class="col-2 " style="border: none;"><img class="col-3" src="{% static 'image/login-icon.png' %}" style="width: 50px;"></button></div>
+                
+            </form>
+            <div class="row"><button class="col-4  " onclick="Ontime()" style="border: none;"><img  src="{% static 'image/login-icon.png' %}" style="width: 50px;"></button><h3 class=" col-4 offset-4 mt-3">SIGN UP</h3></div>
+        </div>
+        
+        </div>
+    </div>
+
+
+    <div class="col-6  mt-4 p-2" id="sign_up" >
+        <div class="card mt-5 P-2">
+      
+            <div class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded  mt-3">
+                <!-- <div class="col-3  offset-3 p-3 " style="border-radius: 60px; opacity: 0.7;box-shadow: 2px 2px 2px 3px black; @media screen (max-width:670px) {border-radius:0px;}" >
+                    <img src="{% static 'image/icons8-login-96.png' %}" alt="icon">
+                </div> -->
+
+            <form class="from mt-3 " method="POST" action="">
+                {% csrf_token %}
+                <input type="text" onkeyup="On_Time_input_event()" class="col-6 offset-2 mt-3 rounded" placeholder="EMAIL" name="email" id="email"><br>
+                <input type="password" onkeyup="On_Time_input_event()" class="col-6 offset-2 mt-3 rounded" placeholder="PASSWORD" name="password" id="password"><br>
+                <input type="password" onkeyup="On_Time_input_event()" class="col-6 offset-2 mt-3 rounded" placeholder="CONFORM PASSWORD" name="conformpassword" id="conformpassword">
+                <div class="row"><h3 class="text-left col-6 offset-2 mt-3">sign_up</h3><button class="col-2 " id="myBtn" name="signup" style="border: none;"><img class="col-3" src="{% static 'image/login-icon.png' %}" style="width: 50px;"></button></div>
+                
+            </form>
+            
+        </div>
+        
+        </div>
+    </div>
+
+    <div class="col-6  p-2 mt-3" id="sign_up2">
+        <h1 class="text-center">WELCOME</h1><div class="card"><div class="card-body shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <img class="img-fluid"  src="{% static 'image/login.jpg' %}" style="height: 290px;"  alt="login pic"></div></div>
+    </div>
+</div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script>
+
+    {% for message in messages %}
+    alert("{{message.tags}}")
+    {% endfor %}
+
+    var change_div=document.getElementById('change_div')
+    var change_div1=document.getElementById('change_div2')
+    var sign_up=document.getElementById('sign_up')
+    var sign_up2=document.getElementById('sign_up2')
+    function Ontime(){
+        change_div.style.display="none";
+        change_div1.style.display="none";
+        sign_up.style.display="block";
+        sign_up2.style.display="block";
+
+
+    }
+
+    
+    function On_Time_input_event(){
+        var email=document.getElementById('email').value;
+        email=email.includes('@gmail.com');
+        var password=document.getElementById('password').value;
+        passwordD=password.includes('@');
+        var confompassword=document.getElementById('conformpassword').value;
+        console.log(password);
+        console.log(confompassword);
+
+        
+        
+      if (email && passwordD && password.length<=8 && password==confompassword ){
+        document.getElementById("myBtn").disabled = false;
+        console.log('work');
+
+        
+      }
+      else{
+        document.getElementById("myBtn").disabled = true;
+      }
+
+
+    }
+</script>
 
 </body>
 </html>
